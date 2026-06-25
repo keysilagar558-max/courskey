@@ -1,218 +1,636 @@
 
-```html
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
-<html>
+<!DOCTYPE html>
+<html lang="es">
 <head>
-<link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro">
-<link rel="stylesheet" type="text/css" href="./lib/style.css">
-<script type="text/javascript" src="./lib/hidebib.js"></script>
-<title>UNAP-EST315</title>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-<meta name="keywords" content="gestión de proyectos TIC, GitHub, Notion, portafolios, ciencia de datos, desarrollo de software, redes, telecomunicaciones, estadística, PMBOK, Scrum, Kanban" />
-<meta name="description" content="Sílabo actualizado del curso de Gestión de Proyectos TICs - Ingeniería Estadística e Informática - UNAP" />
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sílabos 2026 · Keysi</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --series:    #6C5CE7;
+    --regresion: #00B894;
+    --modelos:   #E17055;
+    --gestion:   #FDCB6E;
+    --redes:     #0984E3;
+    --machine:   #A29BFE;
+    --bg: #0F0F1A;
+    --card: #16162A;
+    --border: rgba(255,255,255,0.07);
+    --text: #F0EEFF;
+    --muted: rgba(240,238,255,0.45);
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'Inter', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+  }
+
+  /* HERO */
+  .hero {
+    text-align: center;
+    padding: 4rem 1.5rem 3rem;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse 80% 60% at 50% 0%, rgba(108,92,231,0.18) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .hero-badge {
+    display: inline-block;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--series);
+    border: 1px solid rgba(108,92,231,0.4);
+    border-radius: 20px;
+    padding: 4px 14px;
+    margin-bottom: 1.2rem;
+  }
+  .hero h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2rem, 6vw, 3.5rem);
+    line-height: 1.15;
+    margin-bottom: 0.75rem;
+  }
+  .hero h1 span { color: var(--series); }
+  .hero p {
+    font-size: 15px;
+    color: var(--muted);
+    max-width: 480px;
+    margin: 0 auto 2rem;
+    line-height: 1.7;
+  }
+  .hero-meta {
+    display: flex;
+    justify-content: center;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+  }
+  .meta-chip {
+    font-size: 12px;
+    color: var(--muted);
+    display: flex;
+    align-items: center;
+    gap: 5px;
+  }
+  .meta-chip svg { width: 14px; height: 14px; opacity: 0.6; }
+
+  /* GRID */
+  .grid-section { padding: 0 1.25rem 1.5rem; max-width: 1100px; margin: 0 auto; }
+  .section-label {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 1rem;
+    padding-left: 2px;
+  }
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(310px, 1fr));
+    gap: 14px;
+  }
+
+  /* CARD */
+  .card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    overflow: hidden;
+    cursor: pointer;
+    transition: transform 0.2s, border-color 0.2s, box-shadow 0.2s;
+    position: relative;
+  }
+  .card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 12px 40px rgba(0,0,0,0.4);
+  }
+  .card-top {
+    padding: 1.25rem 1.25rem 1rem;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+  }
+  .card-icon {
+    width: 46px; height: 46px;
+    border-radius: 12px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 22px;
+    flex-shrink: 0;
+  }
+  .card-info { flex: 1; min-width: 0; }
+  .card-code {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-bottom: 3px;
+  }
+  .card-title {
+    font-size: 15px;
+    font-weight: 600;
+    line-height: 1.3;
+    color: var(--text);
+  }
+  .card-docente {
+    font-size: 12px;
+    color: var(--muted);
+    margin-top: 5px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .card-body { padding: 1rem 1.25rem; }
+  .card-sumilla {
+    font-size: 12.5px;
+    color: var(--muted);
+    line-height: 1.65;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    margin-bottom: 1rem;
+  }
+  .card-pills { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 1rem; }
+  .pill {
+    font-size: 10px;
+    font-weight: 600;
+    padding: 3px 9px;
+    border-radius: 20px;
+  }
+  .card-actions { display: flex; gap: 8px; }
+  .btn {
+    flex: 1;
+    padding: 8px 0;
+    border-radius: 8px;
+    font-size: 12px;
+    font-weight: 600;
+    border: none;
+    cursor: pointer;
+    transition: opacity 0.15s, transform 0.1s;
+    text-align: center;
+    text-decoration: none;
+    display: flex; align-items: center; justify-content: center; gap: 5px;
+  }
+  .btn:hover { opacity: 0.85; transform: scale(0.98); }
+  .btn-primary { color: #fff; }
+  .btn-ghost {
+    background: rgba(255,255,255,0.06);
+    color: var(--muted);
+    border: 1px solid var(--border);
+  }
+
+  /* MODAL */
+  .overlay {
+    display: none;
+    position: fixed; inset: 0;
+    background: rgba(0,0,0,0.75);
+    backdrop-filter: blur(6px);
+    z-index: 100;
+    padding: 1rem;
+    overflow-y: auto;
+  }
+  .overlay.open { display: flex; align-items: flex-start; justify-content: center; padding-top: 2rem; }
+  .modal {
+    background: #1A1A2E;
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 20px;
+    width: 100%;
+    max-width: 720px;
+    overflow: hidden;
+    margin-bottom: 2rem;
+  }
+  .modal-header {
+    padding: 1.5rem 1.5rem 1.25rem;
+    border-bottom: 1px solid rgba(255,255,255,0.07);
+    display: flex; align-items: flex-start; gap: 14px;
+  }
+  .modal-icon {
+    width: 56px; height: 56px;
+    border-radius: 14px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 28px;
+    flex-shrink: 0;
+  }
+  .modal-info { flex: 1; }
+  .modal-code { font-size: 11px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; }
+  .modal-title { font-family: 'Playfair Display', serif; font-size: 22px; margin: 4px 0 6px; }
+  .modal-docente { font-size: 13px; color: var(--muted); }
+  .close-btn {
+    background: rgba(255,255,255,0.07);
+    border: none; color: var(--muted);
+    width: 34px; height: 34px;
+    border-radius: 50%;
+    cursor: pointer; font-size: 18px;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+    transition: background 0.15s;
+  }
+  .close-btn:hover { background: rgba(255,255,255,0.14); }
+  .modal-body { padding: 1.5rem; }
+  .modal-section { margin-bottom: 1.5rem; }
+  .modal-section h3 {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 8px;
+  }
+  .modal-section p, .modal-section li {
+    font-size: 13.5px;
+    color: rgba(240,238,255,0.8);
+    line-height: 1.7;
+  }
+  .modal-section ul { padding-left: 1.2rem; }
+  .unidad-card {
+    border-radius: 10px;
+    padding: 1rem;
+    margin-bottom: 10px;
+    border: 1px solid rgba(255,255,255,0.07);
+  }
+  .unidad-n { font-size: 10px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 4px; }
+  .unidad-titulo { font-size: 14px; font-weight: 600; margin-bottom: 6px; }
+  .unidad-semanas { font-size: 12px; color: var(--muted); margin-bottom: 8px; }
+  .evidencias { display: flex; flex-direction: column; gap: 4px; }
+  .ev-tag {
+    font-size: 11px;
+    padding: 3px 10px;
+    border-radius: 20px;
+    display: inline-block;
+    width: fit-content;
+  }
+  .info-row {
+    display: flex;
+    justify-content: space-between;
+    padding: 7px 0;
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+    font-size: 13px;
+  }
+  .info-row:last-child { border-bottom: none; }
+  .info-row span:first-child { color: var(--muted); }
+  .modal-footer {
+    padding: 1rem 1.5rem;
+    border-top: 1px solid rgba(255,255,255,0.07);
+    display: flex; gap: 10px;
+  }
+  .footer-btn {
+    flex: 1; padding: 10px;
+    border-radius: 10px;
+    font-size: 13px; font-weight: 600;
+    border: none; cursor: pointer;
+    transition: opacity 0.15s;
+    display: flex; align-items: center; justify-content: center; gap: 6px;
+  }
+  .footer-btn:hover { opacity: 0.85; }
+  .footer-btn-ghost {
+    background: rgba(255,255,255,0.06);
+    color: var(--muted);
+    border: 1px solid var(--border);
+  }
+
+  /* ACCENT LINE */
+  .card-accent { height: 3px; width: 100%; }
+
+  /* FOOTER */
+  .site-footer {
+    text-align: center;
+    padding: 2rem 1rem;
+    font-size: 12px;
+    color: var(--muted);
+    border-top: 1px solid var(--border);
+    margin-top: 2rem;
+  }
+
+  @media (max-width: 500px) {
+    .hero { padding: 3rem 1rem 2rem; }
+    .grid { grid-template-columns: 1fr; }
+  }
+</style>
 </head>
+<body>
 
-<body style="background-color: #060913; margin: 0; padding:0;">
-<div style="padding: 25px;">
-<table width="800" border="0" align="center" cellpadding="20" style="background-color: #fff;">
-<tr>
-<td>
-
-<table width="100%" align="center" border="0" cellpadding="10">
-<tr>
-<td width="70%" style="vertical-align: top; text-align: left;">
-<p style="font-size: 36px;">Gestión de Proyectos TICs</p>
-<p style="font-size: 16px;">
-Ingeniería Estadística e Informática<br>
-Facultad de Ingeniería Estadística e Informática<br>
-Universidad Nacional del Altiplano - Puno
-</p>
-<p style="font-size: 16px;">
-Código: EST315 | Ciclo: VI | Créditos: 4<br>
-Horas: 3 teóricas, 2 prácticas | Total: 5 horas
-</p>
-<p style="font-size: 16px;">
-Prof. M. Sc. Romel Percy Melgarejo Bolívar
-</p>
-</td>
-<td width="30%" valign="bottom" align="right"></td>
-</tr>
-
-<tr>
-<td colspan="2">
-<p>
-<a href="#sumilla">Sumilla</a> |
-<a href="#logro">Logro</a> |
-<a href="#contenido">Contenido</a> |
-<a href="#metodologia">Metodología</a> |
-<a href="#evaluacion">Evaluación</a> |
-<a href="#entregables">Entregables</a> |
-<a href="#recursos">Recursos</a> |
-<a href="#bibliografia">Bibliografía</a> |
-<a href="#contacto">Contacto</a>
-</p>
-</td>
-</tr>
-</table>
-
-<hr/>
-
-<heading id="sumilla">Sumilla</heading>
-<p style="text-align: justify">
-El curso de Gestión de Proyectos TICs corresponde al área de Estudios de Especialidad y es de naturaleza teórico-práctica. Tiene como propósito desarrollar competencias para formular, planificar, ejecutar, monitorear, controlar y cerrar proyectos tecnológicos vinculados a la Ingeniería Estadística e Informática.
-</p>
-
-<p style="text-align: justify">
-El curso se orienta a la gestión de portafolios de proyectos desde el inicio hasta el cierre, integrando las principales líneas de desarrollo profesional de la carrera: desarrollo de software, programación, diseño de sistemas, redes y telecomunicaciones, estadística aplicada, ciencia de datos, inteligencia artificial, análisis estadístico y asesorías de tesis relacionadas con el procesamiento de datos.
-</p>
-
-<p style="text-align: justify">
-Para ello, los estudiantes utilizarán herramientas colaborativas como GitHub, GitHub Projects y Notion, aplicando metodologías tradicionales, ágiles e híbridas como PMBOK, Scrum, Kanban, Design Thinking y gestión basada en evidencias. El curso promueve el trabajo en equipo, la trazabilidad, la documentación técnica, la gestión de tareas, la comunicación efectiva y la entrega progresiva de valor mediante proyectos reales.
-</p>
-
-<hr/>
-
-<heading id="logro">Logro del curso</heading>
-<p style="text-align: justify">
-Al finalizar el curso, el estudiante gestiona portafolios y proyectos de Tecnologías de Información y Comunicación aplicando metodologías tradicionales, ágiles e híbridas para planificar, ejecutar, monitorear y controlar iniciativas relacionadas con desarrollo de software, redes y telecomunicaciones, estadística, ciencia de datos, inteligencia artificial e investigación aplicada, utilizando herramientas digitales que garanticen trazabilidad, calidad y cumplimiento de objetivos durante todo el ciclo de vida del proyecto.
-</p>
-
-<hr/>
-
-<heading id="contenido">Contenido</heading>
-
-<div class="pub">
-<heading>Unidad I: Formulación, planificación y organización del portafolio de proyectos TIC</heading>
-<p><b>Duración:</b> Semanas 1 al 9</p>
-<p><b>Logro de unidad:</b> Formula y organiza un proyecto TIC real mediante la identificación de problemas, definición de objetivos, planificación de entregables y construcción de un portafolio digital en GitHub y Notion.</p>
-
-<ul>
-<li><b>Semana 1:</b> Presentación del curso. Enfoque por proyectos y portafolios. Líneas de trabajo: software, redes, estadística, ciencia de datos e investigación.</li>
-<li><b>Semana 2:</b> Gestión de proyectos TIC. Proyecto, programa y portafolio. Ciclo de vida del proyecto.</li>
-<li><b>Semana 3:</b> Identificación de problemas, necesidades y oportunidades en contextos reales.</li>
-<li><b>Semana 4:</b> Design Thinking e ideación de proyectos tecnológicos.</li>
-<li><b>Semana 5:</b> Formulación del proyecto: problema, objetivos, alcance, entregables e indicadores.</li>
-<li><b>Semana 6:</b> Acta de constitución del proyecto. Roles, responsabilidades e interesados.</li>
-<li><b>Semana 7:</b> Organización del portafolio en Notion: documentación, cronograma, bitácora y evidencias.</li>
-<li><b>Semana 8:</b> Organización del repositorio en GitHub: estructura, README, issues, milestones y control de versiones.</li>
-<li><b>Semana 9:</b> Sustentación parcial del proyecto: pitch, Project Charter, tablero de seguimiento y portafolio inicial.</li>
-</ul>
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-badge">UNA Puno · 2026-I</div>
+  <h1>Mis <span>Sílabos</span><br>del Semestre</h1>
+  <p>Ingeniería Estadística e Informática · VI Ciclo · 6 cursos</p>
+  <div class="hero-meta">
+    <span class="meta-chip">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+      30 Mar – 31 Jul 2026
+    </span>
+    <span class="meta-chip">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+      18 semanas
+    </span>
+    <span class="meta-chip">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg>
+      24 créditos totales
+    </span>
+  </div>
 </div>
 
-<div class="pub">
-<heading>Unidad II: Ejecución, seguimiento, control y cierre de proyectos TIC</heading>
-<p><b>Duración:</b> Semanas 10 al 18</p>
-<p><b>Logro de unidad:</b> Ejecuta, monitorea y cierra un proyecto TIC aplicando metodologías ágiles, gestión visual, control de riesgos, indicadores de avance y presentación de resultados mediante un portafolio digital funcional.</p>
-
-<ul>
-<li><b>Semana 10:</b> PMBOK aplicado a proyectos TIC. Enfoques predictivos, adaptativos e híbridos.</li>
-<li><b>Semana 11:</b> Scrum aplicado a proyectos de software, ciencia de datos, redes e investigación.</li>
-<li><b>Semana 12:</b> Kanban y gestión visual de tareas mediante GitHub Projects y Notion.</li>
-<li><b>Semana 13:</b> Gestión del cronograma, recursos, costos y responsabilidades del equipo.</li>
-<li><b>Semana 14:</b> Gestión de riesgos, calidad y cambios en proyectos TIC.</li>
-<li><b>Semana 15:</b> Métricas e indicadores: avance, cumplimiento, productividad, backlog, issues y evidencias.</li>
-<li><b>Semana 16:</b> Documentación técnica, informe del proyecto, manuales, reportes estadísticos o reportes de ciencia de datos.</li>
-<li><b>Semana 17:</b> Preparación de la presentación final: demo, dashboard, prototipo, análisis, informe o solución implementada.</li>
-<li><b>Semana 18:</b> Presentación final, cierre del proyecto, evaluación del portafolio y reflexión del aprendizaje.</li>
-</ul>
+<!-- CARDS -->
+<div class="grid-section">
+  <div class="section-label">Haz clic en un curso para ver el sílabo completo</div>
+  <div class="grid" id="grid"></div>
 </div>
 
-<hr/>
-
-<heading id="metodologia">Metodología</heading>
-<div class="pub">
-<ul>
-<li>Aprendizaje basado en proyectos.</li>
-<li>Trabajo colaborativo por equipos.</li>
-<li>Uso obligatorio de GitHub, GitHub Projects y Notion.</li>
-<li>Aplicación de Scrum, Kanban, PMBOK y metodologías híbridas.</li>
-<li>Desarrollo de portafolios digitales de proyectos.</li>
-<li>Asesoría continua y revisión semanal de avances.</li>
-<li>Presentaciones parciales y finales tipo Demo Day.</li>
-</ul>
+<div class="site-footer">
+  Keysi Lagar · keysilagar558-max · UNA Puno 2026
 </div>
 
-<hr/>
-
-<heading id="evaluacion">Evaluación</heading>
-<div class="pub">
-<ul>
-<li><b>Portafolio digital en Notion y GitHub:</b> 25%</li>
-<li><b>Entregable parcial de la Unidad I:</b> 25%</li>
-<li><b>Seguimiento, avances y gestión del proyecto:</b> 20%</li>
-<li><b>Producto final, informe y sustentación:</b> 25%</li>
-<li><b>Participación, autoevaluación y coevaluación:</b> 5%</li>
-</ul>
+<!-- MODAL -->
+<div class="overlay" id="overlay" onclick="closeModal(event)">
+  <div class="modal" id="modal"></div>
 </div>
 
-<hr/>
+<script>
+const CURSOS = [
+  {
+    code:"EST317", color:"#6C5CE7", icon:"📈",
+    nombre:"Series de Tiempo",
+    docente:"Dr. César A. Lluén Vallejos",
+    creditos:4, horas:"5h/sem", nivel:"Avanzado",
+    aula:"Aula 205, Pab. Antiguo",
+    duracion:"30 Mar – 31 Jul 2026",
+    prerreq:"EST208 Estadística No Paramétrica",
+    modalidad:"Presencial",
+    sumilla:"Modelos univariantes para pronósticos: suavizamiento, descomposición, AR, MA, ARMA, ARIMA, modelos estacionales SARIMA, heterocedásticos ARCH/GARCH y redes neuronales aplicadas a series temporales.",
+    logro:"Producir pronósticos con actitud responsable y ética para la toma de decisiones en investigación.",
+    unidades:[
+      {n:1, titulo:"Box-Jenkins: AR, MA, ARMA, ARIMA", semanas:"Sem 1–9",
+       evidencias:["Ev1: Etapas 1,2,3 modelamiento lineal (50%)","Ev2: Modelos SARIMA (50%)"]},
+      {n:2, titulo:"ARCH/GARCH, Multivariantes y Redes Neuronales", semanas:"Sem 10–18",
+       evidencias:["Ev3: Modelos heterocedásticos (50%)","Ev4: Variables exógenas y multivariadas (50%)"]}
+    ],
+    calificacion:"PF = 50% U1 + 50% U2",
+    biblio:["Guerrero, V. M. (2014). Análisis estadístico y pronóstico de series económicas.","Hanke & Wichern (2006). Pronóstico en los negocios.","Ramos et al. (2016). Series de Tiempo con Eviews. Puno."]
+  },
+  {
+    code:"EST209", color:"#00B894", icon:"📊",
+    nombre:"Regresión Lineal y No Lineal",
+    docente:"Dr. Confesor M. Vargas Valverde",
+    creditos:4, horas:"5h/sem", nivel:"Intermedio",
+    aula:"Pab. Nuevo, Aula 202",
+    duracion:"30 Mar – 31 Jul 2026",
+    prerreq:"EST309 Métodos de Optimización",
+    modalidad:"Presencial",
+    sumilla:"Metodologías estadísticas para estimar modelos explicativos: regresión lineal simple, correlación, modelos curvilíneos, modelos múltiples, GAM y regresión Tobit para datos censurados.",
+    logro:"Usar técnicas de regresión lineal y no lineal para encontrar modelos y realizar pronósticos en investigación.",
+    unidades:[
+      {n:1, titulo:"Modelos de regresión lineales", semanas:"Sem 1–8",
+       evidencias:["Ev1: Trabajos prácticos (50%)","Ev2: Examen escrito (50%)"]},
+      {n:2, titulo:"Modelos de regresión no lineales", semanas:"Sem 9–17",
+       evidencias:["Ev3: Trabajos prácticos (50%)","Ev4: Examen escrito (50%)"]}
+    ],
+    calificacion:"PF = 50% U1 + 50% U2",
+    biblio:["Ostle, B. (1979). Estadística Aplicada. LIMUSA.","Gujarati & Porter (2010). Econometría. Mc Graw Hill.","Pérez C. (2008). Econometría Avanzada. Pearson."]
+  },
+  {
+    code:"EST210", color:"#E17055", icon:"🔢",
+    nombre:"Modelos Lineales",
+    docente:"Dr. Santos O. Morillos Valderrama",
+    creditos:5, horas:"6h/sem", nivel:"Avanzado",
+    aula:"Aula 205, Pab. Antiguo",
+    duracion:"30 Mar – 31 Jul 2026",
+    prerreq:"EST307 Modelos Discretos",
+    modalidad:"Presencial",
+    sumilla:"Distribución de formas cuadráticas, modelos de rango completo y no completo, correlación parcial y múltiple, análisis de varianza y componentes de varianza aplicados a la investigación.",
+    logro:"Explicar fundamentos teóricos para diseño y análisis de modelos de rango completo y no completo con pruebas de hipótesis.",
+    unidades:[
+      {n:1, titulo:"Formas cuadráticas y rango completo", semanas:"Sem 1–9",
+       evidencias:["Ev1: Trabajos (50%)","Ev2: Examen escrito (50%)"]},
+      {n:2, titulo:"Correlación y rango no completo", semanas:"Sem 10–18",
+       evidencias:["Ev3: Trabajos (50%)","Ev4: Examen escrito (50%)"]}
+    ],
+    calificacion:"PF = 50% U1 + 50% U2",
+    biblio:["Graybill, F. (1961). An Introduction To Linear Statistical Models. McGraw-Hill.","Montgomery et al. (2006). Introducción al Análisis de Regresión Lineal.","Searle & Gruber (2017). Linear Models. Jhon Wiley."]
+  },
+  {
+    code:"EST315", color:"#FDCB6E", icon:"🗂️",
+    nombre:"Gestión de Proyectos TICs",
+    docente:"M.Sc. Romel P. Melgarejo Bolívar",
+    creditos:4, horas:"5h/sem", nivel:"Básico",
+    aula:"Aula 101 y Lab 1",
+    duracion:"30 Mar – 31 Jul 2026",
+    prerreq:"EST313 Sistemas de Gestión de BD II",
+    modalidad:"Presencial",
+    sumilla:"Metodologías y herramientas para la gestión de proyectos tecnológicos: planificación, ejecución, control y cierre de proyectos TICs en entornos reales.",
+    logro:"Gestionar proyectos de tecnología de información aplicando metodologías estándar y herramientas modernas.",
+    unidades:[
+      {n:1, titulo:"Fundamentos de gestión de proyectos", semanas:"Sem 1–9",
+       evidencias:["Ev: Trabajos y prácticas (100%)"]},
+      {n:2, titulo:"Aplicación y desarrollo de proyectos TICs", semanas:"Sem 10–18",
+       evidencias:["Ev: Proyecto final (100%)"]}
+    ],
+    calificacion:"PF = 50% U1 + 50% U2",
+    biblio:["Bibliografía y contenidos detallados por confirmar con el docente."]
+  },
+  {
+    code:"EST316", color:"#0984E3", icon:"🌐",
+    nombre:"Arquitectura de Redes y Protocolos",
+    docente:"Ing. Alejandro Apaza Tarqui",
+    creditos:3, horas:"4h/sem", nivel:"Básico",
+    aula:"Aula 205-A",
+    duracion:"30 Mar – 31 Jul 2026",
+    prerreq:"ELE311 Arquitectura de Computadoras",
+    modalidad:"Presencial",
+    sumilla:"Fundamentos de redes computacionales y sus protocolos: arquitectura, tipos, medios, modelos OSI y TCP/IP, servicios, seguridad y simulación con Cisco Packet Tracer.",
+    logro:"Comprender Arquitectura de Redes y Protocolos para diseñar, configurar y administrar redes usando herramientas de simulación.",
+    unidades:[
+      {n:1, titulo:"Fundamentos de comunicación y arquitectura de redes", semanas:"Sem 1–9",
+       evidencias:["Examen escrito Sem 4","Presentación de producto Sem 9"]},
+      {n:2, titulo:"Diseño lógico y protocolar OSI/TCP-IP", semanas:"Sem 10–17",
+       evidencias:["Proyecto servidores DNS, HTTP, FTP (Sem 13)","Examen escrito (Sem 17)"]}
+    ],
+    calificacion:"PF = 50% U1 + 50% U2 · U1: 40%+60% · U2: 30%+20%+50%",
+    biblio:["Apaza T., A. (2020). Redes y Teleproceso, 2a ed. Puno.","Tanenbaum & Wetherall (2012). Redes de computadoras, 5a ed. Pearson.","Stallings, W. (2004). Comunicaciones y Redes de computadores, 7a ed."]
+  },
+  {
+    code:"EST314", color:"#A29BFE", icon:"🤖",
+    nombre:"Aprendizaje No Supervisado",
+    docente:"Ing. Leonid Alemán Gonzales",
+    creditos:4, horas:"5h/sem", nivel:"Avanzado",
+    aula:"Aula 201/Pab. A y Lab 02",
+    duracion:"30 Mar – 31 Jul 2026",
+    prerreq:"EST312 Estadística Computacional",
+    modalidad:"Presencial",
+    sumilla:"Técnicas de preprocesamiento, reducción de dimensionalidad (PCA, LDA, t-SNE, UMAP, autoencoders), agrupamiento (K-Means, DBSCAN, GMM, Spectral) y reglas de asociación (Apriori, FP-Growth) en Python/R.",
+    logro:"Aplicar técnicas de aprendizaje no supervisado en casos avanzados: metodología, reducción de dimensionalidad, agrupamiento y reglas de decisiones.",
+    unidades:[
+      {n:1, titulo:"Preprocesamiento y reducción de dimensionalidad", semanas:"Sem 1–9",
+       evidencias:["Ev: Técnicas básicas ANS (50%) — Sem 6","Ev: Reducción de dimensionalidad (50%) — Sem 9"]},
+      {n:2, titulo:"Agrupamiento y reglas de asociación", semanas:"Sem 10–18",
+       evidencias:["Ev: Técnicas avanzadas clustering (50%) — Sem 15","Ev: Evaluación final ANS (50%) — Sem 18"]}
+    ],
+    calificacion:"PF = 50% U1 + 50% U2",
+    biblio:["Goodfellow & Bengio (2016). Deep Learning. MIT Press.","Bishop, C. (2006). Pattern Recognition and Machine Learning. Springer.","Hastie et al. (2014). The Elements of Statistical Learning. Springer."]
+  }
+];
 
-<heading id="entregables">Entregables</heading>
-<div class="pub">
-<ul>
-<li>Idea de proyecto TIC.</li>
-<li>Project Charter.</li>
-<li>Portafolio en Notion.</li>
-<li>Repositorio en GitHub.</li>
-<li>Tablero Kanban o Scrum.</li>
-<li>Bitácora de avances.</li>
-<li>Cronograma del proyecto.</li>
-<li>Matriz de riesgos.</li>
-<li>Informe técnico o científico.</li>
-<li>Producto funcional, prototipo, dashboard, análisis estadístico, modelo de datos o solución implementada.</li>
-<li>Presentación final del proyecto.</li>
-</ul>
-</div>
+function hexAlpha(hex, a) {
+  const r=parseInt(hex.slice(1,3),16),g=parseInt(hex.slice(3,5),16),b=parseInt(hex.slice(5,7),16);
+  return `rgba(${r},${g},${b},${a})`;
+}
 
-<hr/>
+const grid = document.getElementById('grid');
+CURSOS.forEach((c,i) => {
+  const div = document.createElement('div');
+  div.className = 'card';
+  div.style.borderColor = hexAlpha(c.color, 0.2);
+  div.innerHTML = `
+    <div class="card-accent" style="background:linear-gradient(90deg,${c.color},${hexAlpha(c.color,0.3)})"></div>
+    <div class="card-top">
+      <div class="card-icon" style="background:${hexAlpha(c.color,0.15)}">${c.icon}</div>
+      <div class="card-info">
+        <div class="card-code" style="color:${c.color}">${c.code}</div>
+        <div class="card-title">${c.nombre}</div>
+        <div class="card-docente">${c.docente}</div>
+      </div>
+    </div>
+    <div class="card-body">
+      <div class="card-sumilla">${c.sumilla}</div>
+      <div class="card-pills">
+        <span class="pill" style="background:${hexAlpha(c.color,0.15)};color:${c.color}">${c.creditos} créditos</span>
+        <span class="pill" style="background:rgba(255,255,255,0.06);color:rgba(240,238,255,0.5)">${c.nivel}</span>
+        <span class="pill" style="background:rgba(255,255,255,0.06);color:rgba(240,238,255,0.5)">${c.horas}</span>
+      </div>
+      <div class="card-actions">
+        <button class="btn btn-primary" style="background:${c.color}" onclick="openModal(${i})">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+          Ver sílabo
+        </button>
+        <button class="btn btn-ghost" onclick="descargar(${i})">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+          Descargar
+        </button>
+      </div>
+    </div>
+  `;
+  grid.appendChild(div);
+});
 
-<heading id="recursos">Recursos</heading>
-<div class="pub">
-<ul>
-<li><a href="https://github.com/" target="_blank">GitHub</a></li>
-<li><a href="https://docs.github.com/en/issues/planning-and-tracking-with-projects" target="_blank">GitHub Projects</a></li>
-<li><a href="https://notion.so/" target="_blank">Notion</a></li>
-<li><a href="https://www.pmi.org/" target="_blank">Project Management Institute</a></li>
-<li><a href="https://www.scrum.org/" target="_blank">Scrum.org</a></li>
-<li><a href="https://trello.com/" target="_blank">Trello</a></li>
-<li><a href="https://www.atlassian.com/software/jira" target="_blank">Jira</a></li>
-<li><a href="https://colab.research.google.com/" target="_blank">Google Colab</a></li>
-</ul>
-</div>
+function openModal(i) {
+  const c = CURSOS[i];
+  const modal = document.getElementById('modal');
+  const unidadesHTML = c.unidades.map(u => `
+    <div class="unidad-card" style="background:${hexAlpha(c.color,0.07)};border-color:${hexAlpha(c.color,0.25)}">
+      <div class="unidad-n" style="color:${c.color}">Unidad ${u.n}</div>
+      <div class="unidad-titulo">${u.titulo}</div>
+      <div class="unidad-semanas">${u.semanas}</div>
+      <div class="evidencias">${u.evidencias.map(e=>`<span class="ev-tag" style="background:${hexAlpha(c.color,0.15)};color:${c.color}">${e}</span>`).join('')}</div>
+    </div>
+  `).join('');
 
-<hr/>
+  modal.innerHTML = `
+    <div class="modal-header">
+      <div class="modal-icon" style="background:${hexAlpha(c.color,0.2)};font-size:28px">${c.icon}</div>
+      <div class="modal-info">
+        <div class="modal-code" style="color:${c.color}">${c.code}</div>
+        <div class="modal-title">${c.nombre}</div>
+        <div class="modal-docente">${c.docente}</div>
+      </div>
+      <button class="close-btn" onclick="closeModal()">✕</button>
+    </div>
+    <div class="modal-body">
+      <div class="modal-section">
+        <h3>Datos del curso</h3>
+        <div class="info-row"><span>Créditos</span><span>${c.creditos}</span></div>
+        <div class="info-row"><span>Horas semanales</span><span>${c.horas}</span></div>
+        <div class="info-row"><span>Nivel</span><span>${c.nivel}</span></div>
+        <div class="info-row"><span>Aula</span><span>${c.aula}</span></div>
+        <div class="info-row"><span>Prerrequisito</span><span>${c.prerreq}</span></div>
+        <div class="info-row"><span>Duración</span><span>${c.duracion}</span></div>
+        <div class="info-row"><span>Modalidad</span><span>${c.modalidad}</span></div>
+      </div>
+      <div class="modal-section">
+        <h3>Sumilla</h3>
+        <p>${c.sumilla}</p>
+      </div>
+      <div class="modal-section">
+        <h3>Logro del curso</h3>
+        <p>${c.logro}</p>
+      </div>
+      <div class="modal-section">
+        <h3>Unidades didácticas</h3>
+        ${unidadesHTML}
+      </div>
+      <div class="modal-section">
+        <h3>Calificación</h3>
+        <p>${c.calificacion}</p>
+      </div>
+      <div class="modal-section">
+        <h3>Bibliografía básica</h3>
+        <ul>${c.biblio.map(b=>`<li>${b}</li>`).join('')}</ul>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="footer-btn" style="background:${c.color};color:#fff" onclick="descargar(${i})">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+        Descargar sílabo
+      </button>
+      <button class="footer-btn footer-btn-ghost" onclick="closeModal()">Cerrar</button>
+    </div>
+  `;
+  document.getElementById('overlay').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
 
-<heading id="bibliografia">Bibliografía</heading>
-<div class="pub">
-<ul>
-<li>Project Management Institute. PMBOK® Guide – Seventh Edition. PMI, 2021.</li>
-<li>Schwaber, K. & Sutherland, J. The Scrum Guide. 2020.</li>
-<li>Schwalbe, K. Information Technology Project Management. Cengage Learning.</li>
-<li>Meredith, J. R. & Mantel, S. J. Project Management: A Managerial Approach.</li>
-<li>Pressman, R. Ingeniería del Software: Un enfoque práctico.</li>
-<li>Kerzner, H. Project Management: A Systems Approach to Planning, Scheduling, and Controlling.</li>
-<li>Wysocki, R. Effective Project Management: Traditional, Agile, Extreme, Hybrid.</li>
-</ul>
-</div>
+function closeModal(e) {
+  if (!e || e.target === document.getElementById('overlay')) {
+    document.getElementById('overlay').classList.remove('open');
+    document.body.style.overflow = '';
+  }
+}
 
-<hr/>
+function descargar(i) {
+  const c = CURSOS[i];
+  const contenido = `SÍLABO ${c.code} — ${c.nombre.toUpperCase()}
+${'='.repeat(60)}
+Docente: ${c.docente}
+Créditos: ${c.creditos} | Horas: ${c.horas} | Nivel: ${c.nivel}
+Aula: ${c.aula}
+Duración: ${c.duracion}
+Prerrequisito: ${c.prerreq}
 
-<heading id="contacto">Contacto</heading>
-<p>permelro@unap.edu.pe</p>
+SUMILLA
+${c.sumilla}
 
-<hr/>
+LOGRO DEL CURSO
+${c.logro}
 
-<div id="footer">
-<heading>&copy; 2026 UNAP - FIEI - Ingeniería Estadística e Informática</heading>
-</div>
+UNIDADES DIDÁCTICAS
+${c.unidades.map(u=>`
+Unidad ${u.n}: ${u.titulo} (${u.semanas})
+${u.evidencias.map(e=>'  • '+e).join('\n')}`).join('\n')}
 
-</td>
-</tr>
-</table>
-<div style="height: 40px;"></div>
-</div>
+CALIFICACIÓN
+${c.calificacion}
 
-<script xml:space="preserve" language="JavaScript">hideallbibs();</script>
+BIBLIOGRAFÍA BÁSICA
+${c.biblio.map(b=>'• '+b).join('\n')}
+
+---
+UNA Puno · Ingeniería Estadística e Informática · 2026-I
+`;
+  const blob = new Blob([contenido], {type:'text/plain;charset=utf-8'});
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = `silabo_${c.code}.txt`;
+  a.click();
+}
+</script>
 </body>
 </html>
-```
