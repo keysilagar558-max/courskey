@@ -1,635 +1,124 @@
-
 <!DOCTYPE html>
 <html lang="es">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Sílabos 2026 · Keysi</title>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+<title>Mis Sílabos 2026 · Keysi</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
-  :root {
-    --series:    #6C5CE7;
-    --regresion: #00B894;
-    --modelos:   #E17055;
-    --gestion:   #FDCB6E;
-    --redes:     #0984E3;
-    --machine:   #A29BFE;
-    --bg: #0F0F1A;
-    --card: #16162A;
-    --border: rgba(255,255,255,0.07);
-    --text: #F0EEFF;
-    --muted: rgba(240,238,255,0.45);
-  }
-  * { box-sizing: border-box; margin: 0; padding: 0; }
-  body {
-    font-family: 'Inter', sans-serif;
-    background: var(--bg);
-    color: var(--text);
-    min-height: 100vh;
-  }
-
-  /* HERO */
-  .hero {
-    text-align: center;
-    padding: 4rem 1.5rem 3rem;
-    position: relative;
-    overflow: hidden;
-  }
-  .hero::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: radial-gradient(ellipse 80% 60% at 50% 0%, rgba(108,92,231,0.18) 0%, transparent 70%);
-    pointer-events: none;
-  }
-  .hero-badge {
-    display: inline-block;
-    font-size: 11px;
-    font-weight: 600;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    color: var(--series);
-    border: 1px solid rgba(108,92,231,0.4);
-    border-radius: 20px;
-    padding: 4px 14px;
-    margin-bottom: 1.2rem;
-  }
-  .hero h1 {
-    font-family: 'Playfair Display', serif;
-    font-size: clamp(2rem, 6vw, 3.5rem);
-    line-height: 1.15;
-    margin-bottom: 0.75rem;
-  }
-  .hero h1 span { color: var(--series); }
-  .hero p {
-    font-size: 15px;
-    color: var(--muted);
-    max-width: 480px;
-    margin: 0 auto 2rem;
-    line-height: 1.7;
-  }
-  .hero-meta {
-    display: flex;
-    justify-content: center;
-    gap: 1.5rem;
-    flex-wrap: wrap;
-  }
-  .meta-chip {
-    font-size: 12px;
-    color: var(--muted);
-    display: flex;
-    align-items: center;
-    gap: 5px;
-  }
-  .meta-chip svg { width: 14px; height: 14px; opacity: 0.6; }
-
-  /* GRID */
-  .grid-section { padding: 0 1.25rem 1.5rem; max-width: 1100px; margin: 0 auto; }
-  .section-label {
-    font-size: 11px;
-    font-weight: 600;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    color: var(--muted);
-    margin-bottom: 1rem;
-    padding-left: 2px;
-  }
-  .grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(310px, 1fr));
-    gap: 14px;
-  }
-
-  /* CARD */
-  .card {
-    background: var(--card);
-    border: 1px solid var(--border);
-    border-radius: 16px;
-    overflow: hidden;
-    cursor: pointer;
-    transition: transform 0.2s, border-color 0.2s, box-shadow 0.2s;
-    position: relative;
-  }
-  .card:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 12px 40px rgba(0,0,0,0.4);
-  }
-  .card-top {
-    padding: 1.25rem 1.25rem 1rem;
-    border-bottom: 1px solid var(--border);
-    display: flex;
-    align-items: flex-start;
-    gap: 12px;
-  }
-  .card-icon {
-    width: 46px; height: 46px;
-    border-radius: 12px;
-    display: flex; align-items: center; justify-content: center;
-    font-size: 22px;
-    flex-shrink: 0;
-  }
-  .card-info { flex: 1; min-width: 0; }
-  .card-code {
-    font-size: 10px;
-    font-weight: 700;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    margin-bottom: 3px;
-  }
-  .card-title {
-    font-size: 15px;
-    font-weight: 600;
-    line-height: 1.3;
-    color: var(--text);
-  }
-  .card-docente {
-    font-size: 12px;
-    color: var(--muted);
-    margin-top: 5px;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-  }
-  .card-body { padding: 1rem 1.25rem; }
-  .card-sumilla {
-    font-size: 12.5px;
-    color: var(--muted);
-    line-height: 1.65;
-    display: -webkit-box;
-    -webkit-line-clamp: 3;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
-    margin-bottom: 1rem;
-  }
-  .card-pills { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 1rem; }
-  .pill {
-    font-size: 10px;
-    font-weight: 600;
-    padding: 3px 9px;
-    border-radius: 20px;
-  }
-  .card-actions { display: flex; gap: 8px; }
-  .btn {
-    flex: 1;
-    padding: 8px 0;
-    border-radius: 8px;
-    font-size: 12px;
-    font-weight: 600;
-    border: none;
-    cursor: pointer;
-    transition: opacity 0.15s, transform 0.1s;
-    text-align: center;
-    text-decoration: none;
-    display: flex; align-items: center; justify-content: center; gap: 5px;
-  }
-  .btn:hover { opacity: 0.85; transform: scale(0.98); }
-  .btn-primary { color: #fff; }
-  .btn-ghost {
-    background: rgba(255,255,255,0.06);
-    color: var(--muted);
-    border: 1px solid var(--border);
-  }
-
-  /* MODAL */
-  .overlay {
-    display: none;
-    position: fixed; inset: 0;
-    background: rgba(0,0,0,0.75);
-    backdrop-filter: blur(6px);
-    z-index: 100;
-    padding: 1rem;
-    overflow-y: auto;
-  }
-  .overlay.open { display: flex; align-items: flex-start; justify-content: center; padding-top: 2rem; }
-  .modal {
-    background: #1A1A2E;
-    border: 1px solid rgba(255,255,255,0.1);
-    border-radius: 20px;
-    width: 100%;
-    max-width: 720px;
-    overflow: hidden;
-    margin-bottom: 2rem;
-  }
-  .modal-header {
-    padding: 1.5rem 1.5rem 1.25rem;
-    border-bottom: 1px solid rgba(255,255,255,0.07);
-    display: flex; align-items: flex-start; gap: 14px;
-  }
-  .modal-icon {
-    width: 56px; height: 56px;
-    border-radius: 14px;
-    display: flex; align-items: center; justify-content: center;
-    font-size: 28px;
-    flex-shrink: 0;
-  }
-  .modal-info { flex: 1; }
-  .modal-code { font-size: 11px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; }
-  .modal-title { font-family: 'Playfair Display', serif; font-size: 22px; margin: 4px 0 6px; }
-  .modal-docente { font-size: 13px; color: var(--muted); }
-  .close-btn {
-    background: rgba(255,255,255,0.07);
-    border: none; color: var(--muted);
-    width: 34px; height: 34px;
-    border-radius: 50%;
-    cursor: pointer; font-size: 18px;
-    display: flex; align-items: center; justify-content: center;
-    flex-shrink: 0;
-    transition: background 0.15s;
-  }
-  .close-btn:hover { background: rgba(255,255,255,0.14); }
-  .modal-body { padding: 1.5rem; }
-  .modal-section { margin-bottom: 1.5rem; }
-  .modal-section h3 {
-    font-size: 11px;
-    font-weight: 700;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    color: var(--muted);
-    margin-bottom: 8px;
-  }
-  .modal-section p, .modal-section li {
-    font-size: 13.5px;
-    color: rgba(240,238,255,0.8);
-    line-height: 1.7;
-  }
-  .modal-section ul { padding-left: 1.2rem; }
-  .unidad-card {
-    border-radius: 10px;
-    padding: 1rem;
-    margin-bottom: 10px;
-    border: 1px solid rgba(255,255,255,0.07);
-  }
-  .unidad-n { font-size: 10px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 4px; }
-  .unidad-titulo { font-size: 14px; font-weight: 600; margin-bottom: 6px; }
-  .unidad-semanas { font-size: 12px; color: var(--muted); margin-bottom: 8px; }
-  .evidencias { display: flex; flex-direction: column; gap: 4px; }
-  .ev-tag {
-    font-size: 11px;
-    padding: 3px 10px;
-    border-radius: 20px;
-    display: inline-block;
-    width: fit-content;
-  }
-  .info-row {
-    display: flex;
-    justify-content: space-between;
-    padding: 7px 0;
-    border-bottom: 1px solid rgba(255,255,255,0.05);
-    font-size: 13px;
-  }
-  .info-row:last-child { border-bottom: none; }
-  .info-row span:first-child { color: var(--muted); }
-  .modal-footer {
-    padding: 1rem 1.5rem;
-    border-top: 1px solid rgba(255,255,255,0.07);
-    display: flex; gap: 10px;
-  }
-  .footer-btn {
-    flex: 1; padding: 10px;
-    border-radius: 10px;
-    font-size: 13px; font-weight: 600;
-    border: none; cursor: pointer;
-    transition: opacity 0.15s;
-    display: flex; align-items: center; justify-content: center; gap: 6px;
-  }
-  .footer-btn:hover { opacity: 0.85; }
-  .footer-btn-ghost {
-    background: rgba(255,255,255,0.06);
-    color: var(--muted);
-    border: 1px solid var(--border);
-  }
-
-  /* ACCENT LINE */
-  .card-accent { height: 3px; width: 100%; }
-
-  /* FOOTER */
-  .site-footer {
-    text-align: center;
-    padding: 2rem 1rem;
-    font-size: 12px;
-    color: var(--muted);
-    border-top: 1px solid var(--border);
-    margin-top: 2rem;
-  }
-
-  @media (max-width: 500px) {
-    .hero { padding: 3rem 1rem 2rem; }
-    .grid { grid-template-columns: 1fr; }
-  }
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Poppins',sans-serif;background:#fff0f3;color:#1a0010;min-height:100vh}
+.hero{background:linear-gradient(135deg,#c9184a 0%,#ff4d6d 40%,#ff85a1 100%);padding:3.5rem 1.5rem 5rem;text-align:center;position:relative;overflow:hidden}
+.hero::after{content:'';position:absolute;bottom:-2px;left:0;right:0;height:60px;background:#fff0f3;clip-path:ellipse(55% 100% at 50% 100%)}
+.hero-badge{display:inline-block;background:rgba(255,255,255,0.2);border:1px solid rgba(255,255,255,0.4);border-radius:30px;font-size:11px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;padding:5px 16px;color:#fff;margin-bottom:1.2rem}
+.hero h1{font-size:clamp(2rem,6vw,3.5rem);font-weight:800;color:#fff;line-height:1.1;margin-bottom:.6rem;text-shadow:0 2px 20px rgba(0,0,0,0.15)}
+.hero h1 span{color:#ffe0e9}
+.hero p{color:rgba(255,255,255,0.88);font-size:14px;margin-bottom:1.8rem}
+.hero-chips{display:flex;justify-content:center;gap:10px;flex-wrap:wrap}
+.chip{background:rgba(255,255,255,0.18);border:1px solid rgba(255,255,255,0.35);border-radius:30px;padding:5px 14px;font-size:12px;color:#fff;font-weight:500}
+.container{max-width:1100px;margin:0 auto;padding:2.5rem 1.25rem}
+.label{font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#c9184a;margin-bottom:1.2rem}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:18px}
+.card{background:#fff;border-radius:20px;overflow:hidden;cursor:pointer;transition:transform .2s,box-shadow .2s;border:1.5px solid #ffd6e0;box-shadow:0 2px 12px rgba(201,24,74,0.06)}
+.card:hover{transform:translateY(-4px);box-shadow:0 16px 40px rgba(201,24,74,0.18)}
+.card-top-bar{height:5px}
+.card-top{padding:1.25rem;display:flex;gap:12px;border-bottom:1px solid #ffeef2}
+.card-icon{width:50px;height:50px;border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:26px;flex-shrink:0}
+.card-code{font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#c9184a}
+.card-title{font-size:15px;font-weight:700;color:#1a0010;margin:3px 0;line-height:1.3}
+.card-docente{font-size:11.5px;color:#888;margin-top:2px}
+.card-body{padding:1.1rem 1.25rem}
+.card-sumilla{font-size:12.5px;color:#555;line-height:1.65;margin-bottom:1rem;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
+.pills{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:1rem}
+.pill{font-size:10px;font-weight:600;padding:3px 10px;border-radius:20px}
+.pill-main{background:#fff0f3;color:#c9184a}
+.pill-gray{background:#f5f5f5;color:#777}
+.btns{display:flex;gap:8px}
+.btn{flex:1;padding:9px;border-radius:10px;font-size:12px;font-weight:600;border:none;cursor:pointer;transition:all .15s;display:flex;align-items:center;justify-content:center;gap:5px;font-family:'Poppins',sans-serif}
+.btn-ver{background:linear-gradient(135deg,#c9184a,#ff4d6d);color:#fff}
+.btn-ver:hover{opacity:.88;transform:scale(.98)}
+.btn-pdf{background:#fff0f3;color:#c9184a;border:1.5px solid #ffd6e0}
+.btn-pdf:hover{background:#ffd6e0}
+.overlay{display:none;position:fixed;inset:0;background:rgba(26,0,16,0.55);backdrop-filter:blur(5px);z-index:100;padding:1rem;overflow-y:auto}
+.overlay.open{display:flex;align-items:flex-start;justify-content:center;padding-top:1.5rem}
+.modal{background:#fff;border-radius:24px;width:100%;max-width:740px;overflow:hidden;margin-bottom:2rem;border:1.5px solid #ffd6e0;box-shadow:0 24px 80px rgba(201,24,74,0.2)}
+.modal-header{background:linear-gradient(135deg,#c9184a,#ff4d6d);padding:1.75rem 1.5rem;display:flex;gap:14px;align-items:flex-start}
+.modal-icon{width:58px;height:58px;border-radius:16px;background:rgba(255,255,255,0.2);display:flex;align-items:center;justify-content:center;font-size:30px;flex-shrink:0}
+.modal-code{font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,0.75)}
+.modal-title{font-size:20px;font-weight:800;color:#fff;margin:4px 0 5px;line-height:1.2}
+.modal-docente{font-size:13px;color:rgba(255,255,255,0.8)}
+.close-btn{margin-left:auto;background:rgba(255,255,255,0.2);border:none;color:#fff;width:36px;height:36px;border-radius:50%;cursor:pointer;font-size:18px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.close-btn:hover{background:rgba(255,255,255,0.35)}
+.modal-body{padding:1.5rem}
+.msec{margin-bottom:1.5rem}
+.msec h3{font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#c9184a;margin-bottom:10px;padding-bottom:7px;border-bottom:2px solid #ffeef2}
+.msec p,.msec li{font-size:13.5px;color:#333;line-height:1.75}
+.msec ul{padding-left:1.2rem}
+.irow{display:flex;justify-content:space-between;padding:7px 0;border-bottom:1px solid #ffeef2;font-size:13px}
+.irow:last-child{border-bottom:none}
+.irow span:first-child{color:#999;font-weight:500}
+.irow span:last-child{font-weight:600;color:#1a0010}
+.ucard{background:#fff0f3;border:1.5px solid #ffd6e0;border-radius:12px;padding:1rem;margin-bottom:10px}
+.un{font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#c9184a;margin-bottom:3px}
+.ut{font-size:14px;font-weight:700;margin-bottom:4px;color:#1a0010}
+.us{font-size:12px;color:#999;margin-bottom:8px}
+.ev{display:inline-block;font-size:11px;padding:3px 10px;border-radius:20px;background:#ffd6e0;color:#c9184a;font-weight:600;margin:2px 2px 2px 0}
+.modal-footer{padding:1rem 1.5rem;border-top:1px solid #ffeef2;display:flex;gap:10px}
+.fbtn{flex:1;padding:11px;border-radius:12px;font-size:13px;font-weight:600;border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:6px;transition:opacity .15s;font-family:'Poppins',sans-serif}
+.fbtn:hover{opacity:.85}
+.fbtn-p{background:linear-gradient(135deg,#c9184a,#ff4d6d);color:#fff}
+.fbtn-g{background:#fff0f3;color:#c9184a;border:1.5px solid #ffd6e0}
+.site-footer{text-align:center;padding:2rem;font-size:12px;color:#bbb;border-top:1px solid #ffeef2;background:#fff;margin-top:1rem}
+@media(max-width:500px){.grid{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
-
-<!-- HERO -->
 <div class="hero">
   <div class="hero-badge">UNA Puno · 2026-I</div>
   <h1>Mis <span>Sílabos</span><br>del Semestre</h1>
   <p>Ingeniería Estadística e Informática · VI Ciclo · 6 cursos</p>
-  <div class="hero-meta">
-    <span class="meta-chip">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
-      30 Mar – 31 Jul 2026
-    </span>
-    <span class="meta-chip">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-      18 semanas
-    </span>
-    <span class="meta-chip">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg>
-      24 créditos totales
-    </span>
+  <div class="hero-chips">
+    <span class="chip">📅 30 Mar – 31 Jul 2026</span>
+    <span class="chip">📚 18 semanas</span>
+    <span class="chip">🎓 24 créditos</span>
+    <span class="chip">🏫 UNA Puno</span>
   </div>
 </div>
-
-<!-- CARDS -->
-<div class="grid-section">
-  <div class="section-label">Haz clic en un curso para ver el sílabo completo</div>
+<div class="container">
+  <div class="label">Selecciona un curso para ver su sílabo completo</div>
   <div class="grid" id="grid"></div>
 </div>
-
-<div class="site-footer">
-  Keysi Lagar · keysilagar558-max · UNA Puno 2026
-</div>
-
-<!-- MODAL -->
-<div class="overlay" id="overlay" onclick="closeModal(event)">
+<div class="site-footer">Keysi Salcca Lagar · keysilagar558-max · Ingeniería Estadística e Informática · UNA Puno 2026</div>
+<div class="overlay" id="overlay" onclick="closM(event)">
   <div class="modal" id="modal"></div>
 </div>
-
 <script>
-const CURSOS = [
-  {
-    code:"EST317", color:"#6C5CE7", icon:"📈",
-    nombre:"Series de Tiempo",
-    docente:"Dr. César A. Lluén Vallejos",
-    creditos:4, horas:"5h/sem", nivel:"Avanzado",
-    aula:"Aula 205, Pab. Antiguo",
-    duracion:"30 Mar – 31 Jul 2026",
-    prerreq:"EST208 Estadística No Paramétrica",
-    modalidad:"Presencial",
-    sumilla:"Modelos univariantes para pronósticos: suavizamiento, descomposición, AR, MA, ARMA, ARIMA, modelos estacionales SARIMA, heterocedásticos ARCH/GARCH y redes neuronales aplicadas a series temporales.",
-    logro:"Producir pronósticos con actitud responsable y ética para la toma de decisiones en investigación.",
-    unidades:[
-      {n:1, titulo:"Box-Jenkins: AR, MA, ARMA, ARIMA", semanas:"Sem 1–9",
-       evidencias:["Ev1: Etapas 1,2,3 modelamiento lineal (50%)","Ev2: Modelos SARIMA (50%)"]},
-      {n:2, titulo:"ARCH/GARCH, Multivariantes y Redes Neuronales", semanas:"Sem 10–18",
-       evidencias:["Ev3: Modelos heterocedásticos (50%)","Ev4: Variables exógenas y multivariadas (50%)"]}
-    ],
-    calificacion:"PF = 50% U1 + 50% U2",
-    biblio:["Guerrero, V. M. (2014). Análisis estadístico y pronóstico de series económicas.","Hanke & Wichern (2006). Pronóstico en los negocios.","Ramos et al. (2016). Series de Tiempo con Eviews. Puno."]
-  },
-  {
-    code:"EST209", color:"#00B894", icon:"📊",
-    nombre:"Regresión Lineal y No Lineal",
-    docente:"Dr. Confesor M. Vargas Valverde",
-    creditos:4, horas:"5h/sem", nivel:"Intermedio",
-    aula:"Pab. Nuevo, Aula 202",
-    duracion:"30 Mar – 31 Jul 2026",
-    prerreq:"EST309 Métodos de Optimización",
-    modalidad:"Presencial",
-    sumilla:"Metodologías estadísticas para estimar modelos explicativos: regresión lineal simple, correlación, modelos curvilíneos, modelos múltiples, GAM y regresión Tobit para datos censurados.",
-    logro:"Usar técnicas de regresión lineal y no lineal para encontrar modelos y realizar pronósticos en investigación.",
-    unidades:[
-      {n:1, titulo:"Modelos de regresión lineales", semanas:"Sem 1–8",
-       evidencias:["Ev1: Trabajos prácticos (50%)","Ev2: Examen escrito (50%)"]},
-      {n:2, titulo:"Modelos de regresión no lineales", semanas:"Sem 9–17",
-       evidencias:["Ev3: Trabajos prácticos (50%)","Ev4: Examen escrito (50%)"]}
-    ],
-    calificacion:"PF = 50% U1 + 50% U2",
-    biblio:["Ostle, B. (1979). Estadística Aplicada. LIMUSA.","Gujarati & Porter (2010). Econometría. Mc Graw Hill.","Pérez C. (2008). Econometría Avanzada. Pearson."]
-  },
-  {
-    code:"EST210", color:"#E17055", icon:"🔢",
-    nombre:"Modelos Lineales",
-    docente:"Dr. Santos O. Morillos Valderrama",
-    creditos:5, horas:"6h/sem", nivel:"Avanzado",
-    aula:"Aula 205, Pab. Antiguo",
-    duracion:"30 Mar – 31 Jul 2026",
-    prerreq:"EST307 Modelos Discretos",
-    modalidad:"Presencial",
-    sumilla:"Distribución de formas cuadráticas, modelos de rango completo y no completo, correlación parcial y múltiple, análisis de varianza y componentes de varianza aplicados a la investigación.",
-    logro:"Explicar fundamentos teóricos para diseño y análisis de modelos de rango completo y no completo con pruebas de hipótesis.",
-    unidades:[
-      {n:1, titulo:"Formas cuadráticas y rango completo", semanas:"Sem 1–9",
-       evidencias:["Ev1: Trabajos (50%)","Ev2: Examen escrito (50%)"]},
-      {n:2, titulo:"Correlación y rango no completo", semanas:"Sem 10–18",
-       evidencias:["Ev3: Trabajos (50%)","Ev4: Examen escrito (50%)"]}
-    ],
-    calificacion:"PF = 50% U1 + 50% U2",
-    biblio:["Graybill, F. (1961). An Introduction To Linear Statistical Models. McGraw-Hill.","Montgomery et al. (2006). Introducción al Análisis de Regresión Lineal.","Searle & Gruber (2017). Linear Models. Jhon Wiley."]
-  },
-  {
-    code:"EST315", color:"#FDCB6E", icon:"🗂️",
-    nombre:"Gestión de Proyectos TICs",
-    docente:"M.Sc. Romel P. Melgarejo Bolívar",
-    creditos:4, horas:"5h/sem", nivel:"Básico",
-    aula:"Aula 101 y Lab 1",
-    duracion:"30 Mar – 31 Jul 2026",
-    prerreq:"EST313 Sistemas de Gestión de BD II",
-    modalidad:"Presencial",
-    sumilla:"Metodologías y herramientas para la gestión de proyectos tecnológicos: planificación, ejecución, control y cierre de proyectos TICs en entornos reales.",
-    logro:"Gestionar proyectos de tecnología de información aplicando metodologías estándar y herramientas modernas.",
-    unidades:[
-      {n:1, titulo:"Fundamentos de gestión de proyectos", semanas:"Sem 1–9",
-       evidencias:["Ev: Trabajos y prácticas (100%)"]},
-      {n:2, titulo:"Aplicación y desarrollo de proyectos TICs", semanas:"Sem 10–18",
-       evidencias:["Ev: Proyecto final (100%)"]}
-    ],
-    calificacion:"PF = 50% U1 + 50% U2",
-    biblio:["Bibliografía y contenidos detallados por confirmar con el docente."]
-  },
-  {
-    code:"EST316", color:"#0984E3", icon:"🌐",
-    nombre:"Arquitectura de Redes y Protocolos",
-    docente:"Ing. Alejandro Apaza Tarqui",
-    creditos:3, horas:"4h/sem", nivel:"Básico",
-    aula:"Aula 205-A",
-    duracion:"30 Mar – 31 Jul 2026",
-    prerreq:"ELE311 Arquitectura de Computadoras",
-    modalidad:"Presencial",
-    sumilla:"Fundamentos de redes computacionales y sus protocolos: arquitectura, tipos, medios, modelos OSI y TCP/IP, servicios, seguridad y simulación con Cisco Packet Tracer.",
-    logro:"Comprender Arquitectura de Redes y Protocolos para diseñar, configurar y administrar redes usando herramientas de simulación.",
-    unidades:[
-      {n:1, titulo:"Fundamentos de comunicación y arquitectura de redes", semanas:"Sem 1–9",
-       evidencias:["Examen escrito Sem 4","Presentación de producto Sem 9"]},
-      {n:2, titulo:"Diseño lógico y protocolar OSI/TCP-IP", semanas:"Sem 10–17",
-       evidencias:["Proyecto servidores DNS, HTTP, FTP (Sem 13)","Examen escrito (Sem 17)"]}
-    ],
-    calificacion:"PF = 50% U1 + 50% U2 · U1: 40%+60% · U2: 30%+20%+50%",
-    biblio:["Apaza T., A. (2020). Redes y Teleproceso, 2a ed. Puno.","Tanenbaum & Wetherall (2012). Redes de computadoras, 5a ed. Pearson.","Stallings, W. (2004). Comunicaciones y Redes de computadores, 7a ed."]
-  },
-  {
-    code:"EST314", color:"#A29BFE", icon:"🤖",
-    nombre:"Aprendizaje No Supervisado",
-    docente:"Ing. Leonid Alemán Gonzales",
-    creditos:4, horas:"5h/sem", nivel:"Avanzado",
-    aula:"Aula 201/Pab. A y Lab 02",
-    duracion:"30 Mar – 31 Jul 2026",
-    prerreq:"EST312 Estadística Computacional",
-    modalidad:"Presencial",
-    sumilla:"Técnicas de preprocesamiento, reducción de dimensionalidad (PCA, LDA, t-SNE, UMAP, autoencoders), agrupamiento (K-Means, DBSCAN, GMM, Spectral) y reglas de asociación (Apriori, FP-Growth) en Python/R.",
-    logro:"Aplicar técnicas de aprendizaje no supervisado en casos avanzados: metodología, reducción de dimensionalidad, agrupamiento y reglas de decisiones.",
-    unidades:[
-      {n:1, titulo:"Preprocesamiento y reducción de dimensionalidad", semanas:"Sem 1–9",
-       evidencias:["Ev: Técnicas básicas ANS (50%) — Sem 6","Ev: Reducción de dimensionalidad (50%) — Sem 9"]},
-      {n:2, titulo:"Agrupamiento y reglas de asociación", semanas:"Sem 10–18",
-       evidencias:["Ev: Técnicas avanzadas clustering (50%) — Sem 15","Ev: Evaluación final ANS (50%) — Sem 18"]}
-    ],
-    calificacion:"PF = 50% U1 + 50% U2",
-    biblio:["Goodfellow & Bengio (2016). Deep Learning. MIT Press.","Bishop, C. (2006). Pattern Recognition and Machine Learning. Springer.","Hastie et al. (2014). The Elements of Statistical Learning. Springer."]
-  }
+const C=[
+  {code:"EST317",icon:"📈",color:"#c9184a",pdf:"08de86f5-204c-4611-8b33-8f194eef1aaf.pdf",nombre:"Series de Tiempo",docente:"Dr. César A. Lluén Vallejos",creditos:4,horas:"3h teóricas + 2h prácticas",nivel:"Avanzado",aula:"Aula 205, Pab. Antiguo",duracion:"30 Mar – 31 Jul 2026",prerreq:"EST208 Estadística No Paramétrica",modalidad:"Presencial",sumilla:"Modelos univariantes para pronósticos: suavizamiento, descomposición, AR, MA, ARMA, ARIMA, modelos estacionales SARIMA, heterocedásticos ARCH/GARCH y redes neuronales aplicadas a series temporales.",logro:"El estudiante producirá pronósticos con actitud responsable y ética para la toma de decisiones que resuelvan problemas de la realidad en investigación.",unidades:[{n:1,t:"Box-Jenkins: AR, MA, ARMA, ARIMA",s:"Semanas 1–9 · 30 Mar – 1 Jun 2026",logro:"Produce pronósticos mediante metodología Box-Jenkins con modelos lineales y SARIMA.",ev:["Evidencia 1: Etapas 1,2,3 del modelamiento de series lineales (50%)","Evidencia 2: Aplica modelos SARIMA al análisis de una serie de tiempo (50%)"]},{n:2,t:"ARCH/GARCH, Multivariantes y Redes Neuronales",s:"Semanas 10–18 · 1 Jun – 31 Jul 2026",logro:"Produce pronósticos con modelos heterocedásticos ARCH/GARCH, variables exógenas y redes neuronales.",ev:["Evidencia 3: Aplica modelos heterocedásticos a series de tiempo (50%)","Evidencia 4: Aplica modelos con variables exógenas y multivariadas (50%)"]}],cal:"Promedio Final = 50% Unidad 1 + 50% Unidad 2 · Cada unidad: 50% Ev1 + 50% Ev2",bib:["Guerrero, V. M. (2014). Análisis estadístico y pronóstico de series de tiempo económicas. 3ra ed.","Hanke & Wichern (2006). Pronóstico en los negocios. 8va ed. Prentice Hall.","Ramos et al. (2016). Series de Tiempo: Software de análisis con Eviews. Editorial Altiplano. Puno.","WOOLDRIDGE, J. (2006). Introducción a la econometría. 2da ed. PARANINFO.","GUJARATI, D. (2004). Econometría. 4ta ed. Mc. Graw Hill."]},
+  {code:"EST209",icon:"📊",color:"#e63946",pdf:"08de86f5-204c-4428-8c71-31363a7ec618.pdf",nombre:"Regresión Lineal y No Lineal",docente:"Dr. Confesor Milán Vargas Valverde",creditos:4,horas:"3h teóricas + 2h prácticas",nivel:"Intermedio",aula:"Pab. Nuevo, Aula 202",duracion:"30 Mar – 31 Jul 2026",prerreq:"EST309 Métodos de Optimización",modalidad:"Presencial",sumilla:"Metodologías estadísticas para estimar modelos: regresión lineal simple, correlación, modelos curvilíneos, modelos múltiples, GAM y regresión Tobit para datos censurados.",logro:"Usar técnicas de regresión lineal y no lineal para encontrar modelos y realizar pronósticos en trabajos de investigación.",unidades:[{n:1,t:"Modelos de regresión lineales",s:"Semanas 1–8 · 30 Mar – 25 May 2026",logro:"Encuentra modelos de regresión lineales válidos que cumplan los supuestos del modelo.",ev:["Evidencia 1: Trabajos prácticos (50%)","Evidencia 2: Examen escrito (50%)"]},{n:2,t:"Modelos de regresión no lineales",s:"Semanas 9–17 · 25 May – 27 Jul 2026",logro:"Encuentra modelos no lineales que rompen con las limitaciones de los modelos lineales.",ev:["Evidencia 3: Trabajos prácticos (50%)","Evidencia 4: Examen escrito (50%)"]}],cal:"Promedio Final = 50% Unidad 1 + 50% Unidad 2 · Cada unidad: 50% Trabajos + 50% Examen",bib:["Ostle, B. (1979). Estadística Aplicada. LIMUSA S.A. México.","Gujarati D. & Porter D. (2010). Econometría. Mc Graw Hill.","Pérez C. (2008). Econometría Avanzada: Técnicas y herramientas. Pearson.","D'Ancona, A. (2004). Análisis multivariable. Editorial SINTESIS. Madrid.","Córdova M. (2009). Estadística Descriptiva e Inferencial. MOSHERA. Lima."]},
+  {code:"EST210",icon:"🔢",color:"#d00000",pdf:"08de86f5-204c-44fc-8105-611f56b838ea.pdf",nombre:"Modelos Lineales",docente:"Dr. Santos Octavio Morillos Valderrama",creditos:5,horas:"4h teóricas + 2h prácticas",nivel:"Avanzado",aula:"Aula 205, Pab. Antiguo",duracion:"30 Mar – 31 Jul 2026",prerreq:"EST307 Modelos Discretos",modalidad:"Presencial",sumilla:"Distribución de formas cuadráticas, modelos de rango completo y no completo, correlación parcial y múltiple, análisis de varianza y componentes de varianza.",logro:"Explicar fundamentos teóricos para el diseño y análisis de modelos de rango completo y no completo, contrastando pruebas de hipótesis para tomar decisiones.",unidades:[{n:1,t:"Formas cuadráticas y modelos de rango completo",s:"Semanas 1–9 · 30 Mar – 1 Jun 2026",logro:"Determina la distribución de formas cuadráticas y analiza modelos de regresión con inferencias en sus parámetros.",ev:["Evidencia 1: Trabajos (50%)","Evidencia 2: Examen escrito (50%)"]},{n:2,t:"Correlación y modelos de rango no completo",s:"Semanas 10–18 · 1 Jun – 31 Jul 2026",logro:"Realiza pruebas de hipótesis para modelos de correlación parcial y múltiple.",ev:["Evidencia 3: Trabajos (50%)","Evidencia 4: Examen escrito (50%)"]}],cal:"Promedio Final = 50% Unidad 1 + 50% Unidad 2 · Cada unidad: 50% Trabajos + 50% Examen",bib:["Graybill, F. (1961). An Introduction To Linear Statistical Models. McGraw-Hill.","Montgomery et al. (2006). Introducción al Análisis de Regresión Lineal. 3ra ed.","Searle & Gruber (2017). Linear Models. 2da ed. Jhon Wiley.","Hair et al. (1999). Análisis Multivariante. 5ta ed. Prentice Hall.","Fahrmeir et al. (2013). Regression. Springer. New York."]},
+  {code:"EST315",icon:"🗂️",color:"#e85d04",pdf:"08de86f5-204c-458e-8161-20474f17f75a.pdf",nombre:"Gestión de Proyectos TICs",docente:"M.Sc. Romel Percy Melgarejo Bolívar",creditos:4,horas:"3h teóricas + 2h prácticas",nivel:"Básico",aula:"Aula 101 y Laboratorio 1",duracion:"30 Mar – 31 Jul 2026",prerreq:"EST313 Sistemas de Gestión de BD II",modalidad:"Presencial",sumilla:"Metodologías para la gestión de proyectos tecnológicos: planificación, ejecución, control y cierre de proyectos TICs usando GitHub, Notion, Scrum, Kanban y PMBOK en entornos reales.",logro:"Gestionar proyectos de tecnología de información aplicando metodologías estándar y herramientas colaborativas modernas.",unidades:[{n:1,t:"Fundamentos de gestión de proyectos TICs",s:"Semanas 1–9 · 30 Mar – 1 Jun 2026",logro:"Aplica metodologías de gestión de proyectos tecnológicos en casos reales.",ev:["Evidencia Unidad 1: 100%"]},{n:2,t:"Aplicación y desarrollo de proyectos TICs",s:"Semanas 10–18 · 1 Jun – 31 Jul 2026",logro:"Desarrolla y gestiona proyectos TICs completos con herramientas colaborativas.",ev:["Evidencia Unidad 2: 100%"]}],cal:"Promedio Final = 50% Unidad 1 + 50% Unidad 2",bib:["Contenido y bibliografía detallada por confirmar con el docente M.Sc. Romel Melgarejo Bolívar."]},
+  {code:"EST316",icon:"🌐",color:"#9d0208",pdf:"08de86f5-204c-45d1-8858-8df69bf51cc1.pdf",nombre:"Arquitectura de Redes y Protocolos",docente:"Ing. Alejandro Apaza Tarqui",creditos:3,horas:"2h teóricas + 2h prácticas",nivel:"Básico",aula:"Aula 205-A",duracion:"30 Mar – 31 Jul 2026",prerreq:"ELE311 Arquitectura de Computadoras",modalidad:"Presencial",sumilla:"Fundamentos de redes computacionales: arquitectura, tipos, medios, modelos OSI y TCP/IP, servicios, seguridad de redes y simulación práctica con Cisco Packet Tracer.",logro:"Comprender la Arquitectura de Redes y Protocolos para diseñar, configurar y administrar redes de telecomunicaciones usando herramientas de simulación.",unidades:[{n:1,t:"Fundamentos de comunicación de datos y arquitectura de redes",s:"Semanas 1–9 · 30 Mar – 1 Jun 2026",logro:"Determina condiciones técnicas y arquitectónicas de redes informáticas: arquitectura, medios, elementos y protocolos.",ev:["Examen escrito Semana 4 (100%)","Presentación de producto Semana 9"]},{n:2,t:"Diseño arquitectónico lógico y protocolar OSI/TCP-IP",s:"Semanas 10–17 · 1 Jun – 27 Jul 2026",logro:"Diseña arquitecturas lógicas y protocolares en capas OSI y TCP/IP usando Cisco Packet Tracer.",ev:["Proyecto: Configuración servidores DNS, HTTP, FTP y Correos (Sem 13)","Examen escrito (Semana 17)"]}],cal:"PF = 50% U1 + 50% U2 · U1: 40% Ev1 + 60% Ev2 · U2: 30% Ev1 + 20% Ev2 + 50% Ev3",bib:["Apaza T., A. (2020). Redes y Teleproceso. 2da ed. Lucero impresiones. Puno.","Tanenbaum & Wetherall (2012). Redes de computadoras. 5ta ed. Pearson.","Stallings, W. (2004). Comunicaciones y Redes de computadores. 7ma ed. PEARSON.","Dordoigne, J. (2015). Redes informáticas - Nociones fundamentales. 5ta ed."]},
+  {code:"EST314",icon:"🤖",color:"#6a040f",pdf:"08de86f5-204c-4547-8eed-ce1747b24a8f.pdf",nombre:"Aprendizaje No Supervisado",docente:"Ing. Leonid Alemán Gonzales",creditos:4,horas:"3h teóricas + 2h prácticas",nivel:"Avanzado",aula:"Aula 201/Pab. A y Laboratorio 02",duracion:"30 Mar – 31 Jul 2026",prerreq:"EST312 Estadística Computacional",modalidad:"Presencial",sumilla:"Técnicas de preprocesamiento, reducción de dimensionalidad (PCA, LDA, t-SNE, UMAP), agrupamiento (K-Means, DBSCAN, GMM, Spectral) y reglas de asociación (Apriori, FP-Growth) en Python/R con Google Colab y Jupyter.",logro:"Aplicar técnicas de aprendizaje no supervisado en casos avanzados: metodología, reducción de dimensionalidad, agrupamiento y reglas de decisiones.",unidades:[{n:1,t:"Preprocesamiento y reducción de dimensionalidad",s:"Semanas 1–9 · 30 Mar – 1 Jun 2026",logro:"Aplica metodologías y técnicas de preprocesamiento y reducción de dimensionalidad (PCA, SVD, LDA, t-SNE, UMAP, autoencoders).",ev:["Evaluación de técnicas básicas ANS (50%) — Semana 6","Evaluación parcial de reducción de dimensionalidad (50%) — Semana 9"]},{n:2,t:"Agrupamiento y reglas de asociación",s:"Semanas 10–18 · 1 Jun – 31 Jul 2026",logro:"Aplica técnicas de clustering (K-Means, DBSCAN, GMM, Spectral, Deep Clustering) y reglas de asociación (Apriori, FP-Growth, PrefixSpan).",ev:["Evaluación de técnicas avanzadas de agrupamiento (50%) — Semana 15","Evaluación final de Aprendizaje No Supervisado (50%) — Semana 18"]}],cal:"Promedio Final = 50% Unidad 1 + 50% Unidad 2 · Cada unidad: 50% Ev1 + 50% Ev2",bib:["Goodfellow & Bengio (2016). Deep Learning. MIT Press.","Bishop, C. (2006). Pattern Recognition and Machine Learning. Springer.","Hastie et al. (2014). The Elements of Statistical Learning. 2da ed. Springer.","Barber D. (2017). Bayesian Reasoning and Machine Learning. Cambridge University Press.","Theodoridis, S. (2017). Machine Learning: A Bayesian And Optimization Perspective. Elsevier."]}
 ];
-
-function hexAlpha(hex, a) {
-  const r=parseInt(hex.slice(1,3),16),g=parseInt(hex.slice(3,5),16),b=parseInt(hex.slice(5,7),16);
-  return `rgba(${r},${g},${b},${a})`;
-}
-
-const grid = document.getElementById('grid');
-CURSOS.forEach((c,i) => {
-  const div = document.createElement('div');
-  div.className = 'card';
-  div.style.borderColor = hexAlpha(c.color, 0.2);
-  div.innerHTML = `
-    <div class="card-accent" style="background:linear-gradient(90deg,${c.color},${hexAlpha(c.color,0.3)})"></div>
-    <div class="card-top">
-      <div class="card-icon" style="background:${hexAlpha(c.color,0.15)}">${c.icon}</div>
-      <div class="card-info">
-        <div class="card-code" style="color:${c.color}">${c.code}</div>
-        <div class="card-title">${c.nombre}</div>
-        <div class="card-docente">${c.docente}</div>
-      </div>
-    </div>
-    <div class="card-body">
-      <div class="card-sumilla">${c.sumilla}</div>
-      <div class="card-pills">
-        <span class="pill" style="background:${hexAlpha(c.color,0.15)};color:${c.color}">${c.creditos} créditos</span>
-        <span class="pill" style="background:rgba(255,255,255,0.06);color:rgba(240,238,255,0.5)">${c.nivel}</span>
-        <span class="pill" style="background:rgba(255,255,255,0.06);color:rgba(240,238,255,0.5)">${c.horas}</span>
-      </div>
-      <div class="card-actions">
-        <button class="btn btn-primary" style="background:${c.color}" onclick="openModal(${i})">
-          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
-          Ver sílabo
-        </button>
-        <button class="btn btn-ghost" onclick="descargar(${i})">
-          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-          Descargar
-        </button>
-      </div>
-    </div>
-  `;
-  grid.appendChild(div);
+const grid=document.getElementById('grid');
+C.forEach((c,i)=>{
+  const d=document.createElement('div');
+  d.className='card';
+  d.innerHTML=`<div class="card-top-bar" style="background:${c.color}"></div><div class="card-top"><div class="card-icon" style="background:${c.color}18">${c.icon}</div><div><div class="card-code">${c.code}</div><div class="card-title">${c.nombre}</div><div class="card-docente">${c.docente}</div></div></div><div class="card-body"><div class="card-sumilla">${c.sumilla}</div><div class="pills"><span class="pill pill-main">${c.creditos} créditos</span><span class="pill pill-gray">${c.nivel}</span><span class="pill pill-gray">${c.horas}</span></div><div class="btns"><button class="btn btn-ver" onclick="openM(${i})">👁 Ver sílabo</button><button class="btn btn-pdf" onclick="window.open('${c.pdf}','_blank')">📄 Ver PDF</button></div></div>`;
+  grid.appendChild(d);
 });
-
-function openModal(i) {
-  const c = CURSOS[i];
-  const modal = document.getElementById('modal');
-  const unidadesHTML = c.unidades.map(u => `
-    <div class="unidad-card" style="background:${hexAlpha(c.color,0.07)};border-color:${hexAlpha(c.color,0.25)}">
-      <div class="unidad-n" style="color:${c.color}">Unidad ${u.n}</div>
-      <div class="unidad-titulo">${u.titulo}</div>
-      <div class="unidad-semanas">${u.semanas}</div>
-      <div class="evidencias">${u.evidencias.map(e=>`<span class="ev-tag" style="background:${hexAlpha(c.color,0.15)};color:${c.color}">${e}</span>`).join('')}</div>
-    </div>
-  `).join('');
-
-  modal.innerHTML = `
-    <div class="modal-header">
-      <div class="modal-icon" style="background:${hexAlpha(c.color,0.2)};font-size:28px">${c.icon}</div>
-      <div class="modal-info">
-        <div class="modal-code" style="color:${c.color}">${c.code}</div>
-        <div class="modal-title">${c.nombre}</div>
-        <div class="modal-docente">${c.docente}</div>
-      </div>
-      <button class="close-btn" onclick="closeModal()">✕</button>
-    </div>
-    <div class="modal-body">
-      <div class="modal-section">
-        <h3>Datos del curso</h3>
-        <div class="info-row"><span>Créditos</span><span>${c.creditos}</span></div>
-        <div class="info-row"><span>Horas semanales</span><span>${c.horas}</span></div>
-        <div class="info-row"><span>Nivel</span><span>${c.nivel}</span></div>
-        <div class="info-row"><span>Aula</span><span>${c.aula}</span></div>
-        <div class="info-row"><span>Prerrequisito</span><span>${c.prerreq}</span></div>
-        <div class="info-row"><span>Duración</span><span>${c.duracion}</span></div>
-        <div class="info-row"><span>Modalidad</span><span>${c.modalidad}</span></div>
-      </div>
-      <div class="modal-section">
-        <h3>Sumilla</h3>
-        <p>${c.sumilla}</p>
-      </div>
-      <div class="modal-section">
-        <h3>Logro del curso</h3>
-        <p>${c.logro}</p>
-      </div>
-      <div class="modal-section">
-        <h3>Unidades didácticas</h3>
-        ${unidadesHTML}
-      </div>
-      <div class="modal-section">
-        <h3>Calificación</h3>
-        <p>${c.calificacion}</p>
-      </div>
-      <div class="modal-section">
-        <h3>Bibliografía básica</h3>
-        <ul>${c.biblio.map(b=>`<li>${b}</li>`).join('')}</ul>
-      </div>
-    </div>
-    <div class="modal-footer">
-      <button class="footer-btn" style="background:${c.color};color:#fff" onclick="descargar(${i})">
-        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-        Descargar sílabo
-      </button>
-      <button class="footer-btn footer-btn-ghost" onclick="closeModal()">Cerrar</button>
-    </div>
-  `;
+function openM(i){
+  const c=C[i];
+  document.getElementById('modal').innerHTML=`<div class="modal-header"><div class="modal-icon">${c.icon}</div><div><div class="modal-code">${c.code} · ${c.nivel}</div><div class="modal-title">${c.nombre}</div><div class="modal-docente">${c.docente}</div></div><button class="close-btn" onclick="closM()">✕</button></div><div class="modal-body"><div class="msec"><h3>Información del curso</h3><div class="irow"><span>Créditos</span><span>${c.creditos}</span></div><div class="irow"><span>Horas semanales</span><span>${c.horas}</span></div><div class="irow"><span>Nivel</span><span>${c.nivel}</span></div><div class="irow"><span>Aula</span><span>${c.aula}</span></div><div class="irow"><span>Prerrequisito</span><span>${c.prerreq}</span></div><div class="irow"><span>Duración</span><span>${c.duracion}</span></div><div class="irow"><span>Modalidad</span><span>${c.modalidad}</span></div><div class="irow"><span>Semestre</span><span>2026-I · Ciclo VI</span></div></div><div class="msec"><h3>Sumilla</h3><p>${c.sumilla}</p></div><div class="msec"><h3>Logro del curso</h3><p>${c.logro}</p></div><div class="msec"><h3>Unidades didácticas</h3>${c.unidades.map(u=>`<div class="ucard"><div class="un">Unidad ${u.n}</div><div class="ut">${u.t}</div><div class="us">⏱ ${u.s}</div><p style="font-size:13px;color:#555;margin-bottom:8px">${u.logro}</p>${u.ev.map(e=>`<span class="ev">${e}</span>`).join('')}</div>`).join('')}</div><div class="msec"><h3>Calificación</h3><p>${c.cal}</p></div><div class="msec"><h3>Bibliografía</h3><ul>${c.bib.map(b=>`<li>${b}</li>`).join('')}</ul></div></div><div class="modal-footer"><button class="fbtn fbtn-p" onclick="window.open('${c.pdf}','_blank')">📄 Ver PDF original</button><button class="fbtn fbtn-g" onclick="closM()">Cerrar</button></div>`;
   document.getElementById('overlay').classList.add('open');
-  document.body.style.overflow = 'hidden';
+  document.body.style.overflow='hidden';
 }
-
-function closeModal(e) {
-  if (!e || e.target === document.getElementById('overlay')) {
+function closM(e){
+  if(!e||e.target===document.getElementById('overlay')){
     document.getElementById('overlay').classList.remove('open');
-    document.body.style.overflow = '';
+    document.body.style.overflow='';
   }
-}
-
-function descargar(i) {
-  const c = CURSOS[i];
-  const contenido = `SÍLABO ${c.code} — ${c.nombre.toUpperCase()}
-${'='.repeat(60)}
-Docente: ${c.docente}
-Créditos: ${c.creditos} | Horas: ${c.horas} | Nivel: ${c.nivel}
-Aula: ${c.aula}
-Duración: ${c.duracion}
-Prerrequisito: ${c.prerreq}
-
-SUMILLA
-${c.sumilla}
-
-LOGRO DEL CURSO
-${c.logro}
-
-UNIDADES DIDÁCTICAS
-${c.unidades.map(u=>`
-Unidad ${u.n}: ${u.titulo} (${u.semanas})
-${u.evidencias.map(e=>'  • '+e).join('\n')}`).join('\n')}
-
-CALIFICACIÓN
-${c.calificacion}
-
-BIBLIOGRAFÍA BÁSICA
-${c.biblio.map(b=>'• '+b).join('\n')}
-
----
-UNA Puno · Ingeniería Estadística e Informática · 2026-I
-`;
-  const blob = new Blob([contenido], {type:'text/plain;charset=utf-8'});
-  const a = document.createElement('a');
-  a.href = URL.createObjectURL(blob);
-  a.download = `silabo_${c.code}.txt`;
-  a.click();
 }
 </script>
 </body>
